@@ -1,55 +1,35 @@
 <template>
-  <section class="container">
-    <div>
-      <logo/>
-      <h1 class="title">
-        colegiosayan
-      </h1>
-      <h2 class="subtitle">
-        My kryptonian Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green">Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey">GitHub</a>
-      </div>
-    </div>
-  </section>
+  <!--los componentes deben en el mismo arbol del dom-->
+  <div>
+    <slide/>
+    <minicard/>
+    <card/>
+    <Footer/>
+  </div>
 </template>
-
 <script>
-import Logo from '~/components/Logo.vue'
+import Slide from "~/components/Slide.vue";
+import Minicard from "~/components/Minicard.vue";
+import Card from "~/components/Card.vue";
+import Footer from "~/components/Footer.vue";
 
 export default {
   components: {
-    Logo
+    Slide,
+    Minicard,
+    Card,
+    Footer
   }
-}
+};
 </script>
 
 <style>
-
 .container {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
 }
 
 .subtitle {

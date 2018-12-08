@@ -14,10 +14,24 @@ module.exports = {
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
-  },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: "stylesheet",
+        href: "css/bulma-carousel.min.css"
+      }
+    ],
+    script: [
+      {
+        src: "js/bulma-carousel.min.js"
+      }
+    ],
 
+ /*    script: [
+      {
+        src: "~/node_modules/bulma-carousel/dist/css/bulma-carousel.js"
+      }
+    ] */
+  },
   /*
   ** Customize the progress-bar color
   */
@@ -27,14 +41,20 @@ module.exports = {
   ** Global CSS
   */
   css: [
+  
   ],
-
+  // js:[
+  //   '~/node_modules/bulma-carousel/dist/js/bulma-carousel.min.js'
+  // ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
   ],
 
+  router: {
+    linkActiveClass: 'is-active'
+  },
   /*
   ** Nuxt.js modules
   */
@@ -49,6 +69,7 @@ module.exports = {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+    baseURL: 'http://localhost:9000'
   },
 
   /*
