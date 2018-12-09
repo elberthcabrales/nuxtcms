@@ -17,12 +17,12 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: "stylesheet",
-        href: "css/bulma-carousel.min.css"
+        href: "/css/bulma-carousel.min.css"
       }
     ],
     script: [
       {
-        src: "js/bulma-carousel.min.js"
+        src: "/js/bulma-carousel.min.js"
       }
     ],
 
