@@ -1,16 +1,18 @@
 <template>
   <!--los componentes deben en el mismo arbol del dom-->
   <div>
-    contacto
+   diplomados
+   <Panel/>
   </div>
 </template>
 <script>
 
-import Card from "~/components/Card.vue";
-
+import Card from "~/components/Front/Card.vue";
+import Panel from "~/components/Admin/Panel.vue";
 export default {
   components: {
-    Card
+    Card,
+    Panel
   }
 };
 </script>

@@ -1,6 +1,5 @@
 <template>
   <footer class="footer">
-    <section class="secti>>>>>>on">
       <div class="container">
         <div class="columns is-multiline">
           <div class="column is-one-third">
@@ -107,7 +106,6 @@
           </div>
         </div>
       </div>
-    </section>
     <hr>
     <div class="columns is-mobile is-centered">
       <div class="field is-grouped is-grouped-multiline">
@@ -125,6 +123,7 @@
 </template>
 <script>
 export default {
+  name:'Footer',
 
 };
 </script>

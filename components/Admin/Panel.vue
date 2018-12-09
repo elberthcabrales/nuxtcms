@@ -1,27 +1,8 @@
 <template>
-  <div class="container">
-    <Crud/>
+  <section class="container">
     <div class="columns">
-      <div class="column is-12 .is-offset-x">
-        <section class="info-tiles">
-          <div class="tile is-ancestor has-text-centered">
-            <div class="tile is-parent">
-              <article class="tile is-child box">
-                <p class="title">Paginas</p>
-                <p class="subtitle">Administralas</p>
-              </article>
-            </div>
-            <div class="tile is-parent">
-              <article class="tile is-child box">
-                <p class="title">Etiquetas</p>
-                <p class="subtitle">Crea y Borra</p>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        <div class="columns">
-          <!-- <div class="column is-6">
+     
+          <div class='column is-6'>
             <div class="card events-card">
               <header class="card-header">
                 <p class="card-header-title">Events</p>
@@ -33,12 +14,12 @@
               </header>
               <div class="card-table">
                 <div class="card-content">
-                <div class="content">
-                  <div class="control has-icons-left has-icons-right">
-                    <input class="input is-large" type="text" placeholder>
+                  <div class="content">
+                    <div class="control has-icons-left has-icons-right">
+                      <input class="input is-large" type="text" placeholder>
+                    </div>
                   </div>
                 </div>
-              </div>
                 <div class="content">
                   <table class="table is-fullwidth is-striped">
                     <tbody>
@@ -55,7 +36,6 @@
                     </tbody>
                   </table>
                 </div>
-                
               </div>
               <footer class="card-footer">
                 <nav class="pagination is-centered" role="navigation" aria-label="pagination">
@@ -72,26 +52,19 @@
                 </nav>
               </footer>
             </div>
-          </div> -->
-         
+          </div>
         </div>
-
-      </div>
-    </div>
-  </div>
-</template>  
+  </section>
+</template>
 <script>
-import Crud from "@/components/Admin/Crud";
 export default {
-  layout: "admin",
-  name:'pagina',
-  component: {
-    Crud
-  }
+  name: "Panel",
+  props: {
+    size: {
+      type: Number,
+      default: 6,
+      validator: value => value > 3 && value < 13
+    }
+  },
 };
 </script>
-<style>
-.container {
-  margin-block-start: 10px;
-}
-</style>

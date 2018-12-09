@@ -5,10 +5,9 @@
   </div>
 </template>
 <script>
-
 import Menu from "~/components/Admin/Menu";
-
 export default {
+  name:'admin',
   components: {
     Menu
   }

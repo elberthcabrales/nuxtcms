@@ -42,6 +42,7 @@
 </template>
 <script>
 export default {
+  name:'Slide',
   mounted() {
     var carousels = bulmaCarousel.attach();
   }

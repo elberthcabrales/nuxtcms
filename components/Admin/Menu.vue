@@ -17,9 +17,9 @@
 
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
-        <nuxt-link to="/admin/pagina" class="navbar-item">Paginas</nuxt-link>
-        <nuxt-link to="/admin/slide" class="navbar-item">Slide</nuxt-link>
-        <nuxt-link to="/admin/emails" class="navbar-item">Email</nuxt-link>
+        <nuxt-link to="/admin/" class="navbar-item">Paginas</nuxt-link>
+        <nuxt-link to="/admin/slide/" class="navbar-item">Slide</nuxt-link>
+        <nuxt-link to="/admin/email/" class="navbar-item">Email</nuxt-link>
       </div>
 
       <div class="navbar-end">
@@ -36,6 +36,7 @@
 </template>
 <script>
 export default {
+  name:'AdminMenu',
   mounted() {
     var burger = document.querySelector(".burger");
     var menu = document.querySelector("#" + burger.dataset.target);

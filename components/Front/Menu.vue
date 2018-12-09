@@ -29,6 +29,7 @@
 </template>
 <script>
 export default {
+  name:'Menu',
   mounted() {
     var burger = document.querySelector(".burger");
     var menu = document.querySelector("#" + burger.dataset.target);

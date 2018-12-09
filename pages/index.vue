@@ -8,10 +8,10 @@
   </div>
 </template>
 <script>
-import Slide from "~/components/Slide.vue";
-import Minicard from "~/components/Minicard.vue";
-import Card from "~/components/Card.vue";
-import Footer from "~/components/Footer.vue";
+import Slide from "~/components/Front/Slide.vue";
+import Minicard from "~/components/Front/Minicard.vue";
+import Card from "~/components/Front/Card.vue";
+import Footer from "~/components/Front/Footer.vue";
 
 export default {
   components: {
