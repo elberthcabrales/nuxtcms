@@ -2,7 +2,7 @@
   <!--los componentes deben en el mismo arbol del dom-->
   <div>
    diplomados
-   <Panel/>
+
   </div>
 </template>
 <script>
