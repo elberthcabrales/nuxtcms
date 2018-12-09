@@ -41,7 +41,9 @@ module.exports = {
   ** Global CSS
   */
   css: [
-  
+    'quill/dist/quill.snow.css',
+    'quill/dist/quill.bubble.css',
+    'quill/dist/quill.core.css'
   ],
   // js:[
   //   '~/node_modules/bulma-carousel/dist/js/bulma-carousel.min.js'
@@ -50,6 +52,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    { src: '~plugins/nuxt-quill-plugin.js', ssr: false }
   ],
 
   router: {
