@@ -52,10 +52,11 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src: '~plugins/nuxt-quill-plugin.js', ssr: false }
+    { src: '~plugins/nuxt-quill-plugin.js', ssr: false },
   ],
 
   router: {
+    middleware: ['authentication'],
     linkActiveClass: 'is-active'
   },
   /*
@@ -72,7 +73,7 @@ module.exports = {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    baseURL: 'http://localhost:9000'
+    baseURL: 'http://localhost:9000/'
   },
 
   /*
