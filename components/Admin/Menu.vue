@@ -20,6 +20,7 @@
         <nuxt-link to="/admin/" class="navbar-item">Paginas</nuxt-link>
         <nuxt-link to="/admin/slide/" class="navbar-item">Slide</nuxt-link>
         <nuxt-link to="/admin/email/" class="navbar-item">Email</nuxt-link>
+        <nuxt-link to="/admin/user/" class="navbar-item">Users</nuxt-link>
       </div>
 
       <div class="navbar-end">
@@ -36,7 +37,7 @@
 </template>
 <script>
 export default {
-  name:'AdminMenu',
+  name: "AdminMenu",
   mounted() {
     var burger = document.querySelector(".burger");
     var menu = document.querySelector("#" + burger.dataset.target);

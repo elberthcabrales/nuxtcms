@@ -1,8 +1,6 @@
 <template>
-  <section class="container">
     <div class="columns">
-     
-          <div class='column is-6'>
+          <div class='column is-12'>
             <div class="card events-card">
               <header class="card-header">
                 <p class="card-header-title">Events</p>
@@ -54,7 +52,7 @@
             </div>
           </div>
         </div>
-  </section>
+
 </template>
 <script>
 export default {

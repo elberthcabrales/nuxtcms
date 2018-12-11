@@ -56,7 +56,6 @@ module.exports = {
   ],
 
   router: {
-    middleware: ['authentication'],
     linkActiveClass: 'is-active'
   },
   /*

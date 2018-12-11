@@ -15,7 +15,6 @@ import { mapState } from "vuex";
 
 export default {
   layout: "admin",
-  middleware: ["authentication"],
   components: {
     Imgpanel
   },
