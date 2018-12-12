@@ -2,10 +2,10 @@
   <div class="container">
     <div class="columns">
       <div class="column is-6">
-        <Panel/>
+        <Panel title="Paginas"/>
       </div>
       <div class="column is-6">
-        <Panel/>
+        <Panel title="Etiquetas" :entity="hero"/>
       </div>
     </div>
     <section class="container">
@@ -31,6 +31,7 @@ export default {
   },
   data() {
     return {
+      hero:{name:'xxxx',id:1},
       content: "<p>I am Example</p>",
       editorOption: {
         // some quill options
@@ -44,23 +45,24 @@ export default {
     };
   },
   mounted() {
-    console.log("app init, my quill insrance object is:", this.myQuillEditor);
-    setTimeout(() => {
-      this.content = "i am changed";
-    }, 3000);
+    
+    //console.log("app init, my quill insrance object is:", this.myQuillEditor);
+    // setTimeout(() => {
+    //   this.content = "i am changed";
+    // }, 3000);
   },
   methods: {
     onEditorBlur(editor) {
-      console.log("editor blur!", editor);
+      //console.log("editor blur!", editor);
     },
     onEditorFocus(editor) {
-      console.log("editor focus!", editor);
+      //console.log("editor focus!", editor);
     },
     onEditorReady(editor) {
-      console.log("editor ready!", editor);
+      //console.log("editor ready!", editor);
     },
     onEditorChange({ editor, html, text }) {
-      console.log("editor change!", editor, html, text);
+      //console.log("editor change!", editor, html, text);
       this.content = html;
     }
   }

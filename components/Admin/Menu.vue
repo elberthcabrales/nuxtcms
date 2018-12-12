@@ -27,7 +27,7 @@
         <a class="navbar-item">Usuario logeado</a>
         <div class="navbar-item">
           <div class="buttons">
-            <a class="button is-warning">Log in</a>
+            <a class="button is-warning" v-on:click="logout">Logout</a>
           </div>
         </div>
       </div>
@@ -45,6 +45,13 @@ export default {
       burger.classList.toggle("is-active");
       menu.classList.toggle("is-active");
     });
+  },
+  methods: {
+    logout() {
+      console.log("ejecutado");
+      this.$store.dispatch("logout");
+      //this.$store.dispatch("logout")
+    }
   }
 };
 </script>

@@ -26,11 +26,11 @@ module.exports = {
       }
     ],
 
- /*    script: [
-      {
-        src: "~/node_modules/bulma-carousel/dist/css/bulma-carousel.js"
-      }
-    ] */
+    /*    script: [
+         {
+           src: "~/node_modules/bulma-carousel/dist/css/bulma-carousel.js"
+         }
+       ] */
   },
   /*
   ** Customize the progress-bar color
@@ -65,8 +65,16 @@ module.exports = {
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
     // Doc:https://github.com/nuxt-community/modules/tree/master/packages/bulma
-    '@nuxtjs/bulma'
+    '@nuxtjs/bulma',
+    //https://github.com/nuxt-community/modules/tree/master/packages/toast
+    '@nuxtjs/toast',
   ],
+  //toas config position
+  toast: {
+    theme: "toasted-primary", 
+    position: 'top-right',
+    duration : 2000
+  },
   /*
   ** Axios module configuration
   */
@@ -90,7 +98,7 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend(config, ctx) {
-      
+
     }
   }
 }

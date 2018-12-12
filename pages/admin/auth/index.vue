@@ -49,13 +49,17 @@ export default {
   },
   methods: {
     submit() {
+      this.$toast.success('Logging in...')
       this.$store
         .dispatch("authenticateUser", {
           email: this.email,
           password: this.password
         })
     }
-  }
+  },
+  beforeMount() {
+    this.$store.dispatch("verifyTokenExp")
+  },
 };
 </script>
 <style>
