@@ -27,7 +27,6 @@ const createStore = () => {
         }
       },
       clearToken(state) {
-        debugger
         state.authenticated = null;
         localStorage.removeItem('token')
         this.$router.push('/admin/auth');
@@ -61,7 +60,7 @@ const createStore = () => {
       }
     },
     modules: {
-      post: pageModule,
+      page: pageModule,
       email: emailModule,
       user: userModule,
     }

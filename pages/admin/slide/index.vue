@@ -6,7 +6,6 @@
       <imgpanel/>
       <imgpanel/>
     </div>
-    {{posts}}
   </div>
 </template>
 <script>
@@ -18,15 +17,8 @@ export default {
   components: {
     Imgpanel
   },
-  async fetch({ store, $axios }) {
-     // const { data } = await $axios.get("/posts");
-      //store.dispatch("setPosts", data);
-  },
-  computed: {
-    ...mapState({
-      posts: state => state.post.posts
-    })
-  }
+
+
 };
 </script>
 <style>

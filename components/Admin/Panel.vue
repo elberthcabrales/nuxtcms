@@ -21,13 +21,13 @@
           <div class="content">
             <table class="table is-fullwidth is-striped">
               <tbody>
-                <tr>
+                <tr v-for="item in entity" :key="item._id">
                   <td width="5%">
                     <i class="fa fa-bell-o"></i>
                   </td>
-                  <td>{{entity}}</td>
+                  <td>{{item.title}}</td>
                   <td>
-                    <a class="button is-small is-primary" href="#">Editar</a>
+                    <a class="button is-small is-primary" href="#">Editar {{item.id}}</a>
                     <a class="button is-small is-danger" href="#">Borrar</a>
                   </td>
                 </tr>
@@ -63,7 +63,7 @@ export default {
       validator: value => value.length > 3
     },
     entity:{
-      type:Object,
+      type:Array,
       requiered: true,
     }
   }

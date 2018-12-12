@@ -2,10 +2,10 @@
   <div class="container">
     <div class="columns">
       <div class="column is-6">
-        <Panel title="Paginas"/>
+        <Panel title="Paginas" :entity="pages"/>
       </div>
       <div class="column is-6">
-        <Panel title="Etiquetas" :entity="hero"/>
+        <Panel title="Etiquetas" :entity="tags"/>
       </div>
     </div>
     <section class="container">
@@ -23,6 +23,7 @@
 </template>
 <script>
 import Panel from "~/components/Admin/Panel.vue";
+import { mapState } from "vuex";
 
 export default {
   layout: "admin",
@@ -31,7 +32,7 @@ export default {
   },
   data() {
     return {
-      hero:{name:'xxxx',id:1},
+      hero: { name: "xxxx", id: 1 },
       content: "<p>I am Example</p>",
       editorOption: {
         // some quill options
@@ -45,7 +46,6 @@ export default {
     };
   },
   mounted() {
-    
     //console.log("app init, my quill insrance object is:", this.myQuillEditor);
     // setTimeout(() => {
     //   this.content = "i am changed";
@@ -65,6 +65,19 @@ export default {
       //console.log("editor change!", editor, html, text);
       this.content = html;
     }
+  },
+  async fetch({ store, $axios }) {
+    const { data } = await $axios.get("/page");
+    store.dispatch("setPages", data);
+
+    const tags = await $axios.get("/tag");
+    store.dispatch("setTags", tags.data);
+  },
+  computed: {
+    ...mapState({
+      pages: state => state.page.pages,
+      tags: state => state.page.tags
+    })
   }
 };
 </script>
