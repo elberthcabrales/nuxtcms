@@ -14,14 +14,15 @@
           <div class="card-content">
             <div class="content">
               <div class="control has-icons-left has-icons-right">
-                <input class="input is-large" type="text" placeholder>
+                <input class="input is-large" type="text"  v-model="query" placeholder>
               </div>
             </div>
           </div>
           <div class="content">
             <table class="table is-fullwidth is-striped">
+              {{entity.length}}
               <tbody>
-                <tr v-for="item in entity" :key="item._id">
+                <tr v-for="item in  reversedData" :key="item._id">
                   <td width="5%">
                     <i class="fa fa-bell-o"></i>
                   </td>
@@ -36,36 +37,59 @@
           </div>
         </div>
         <footer class="card-footer">
-          <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-            <a class="pagination-previous">Previous</a>
-            <a class="pagination-next">Next page</a>
-            <ul class="pagination-list">
-              <li>
-                <a class="pagination-link" aria-label="Goto page 45">1</a>
-              </li>
-              <li>
-                <a class="pagination-link is-current" aria-current="page">2</a>
-              </li>
-            </ul>
-          </nav>
+          <Paginate
+            :total-pages="Math.round(entity.length/10)"
+            :total="entity.length"
+            :per-page="10"
+            :current-page="currentPage"
+            @pagechanged="onPageChange"
+          />
         </footer>
       </div>
     </div>
   </div>
 </template>
 <script>
+import Paginate from "~/components/Admin/Paginate";
 export default {
   name: "Panel",
+  components: {
+    Paginate
+  },
   props: {
     title: {
       type: String,
       requiered: true,
       validator: value => value.length > 3
     },
-    entity:{
-      type:Array,
-      requiered: true,
+    entity: {
+      type: Array,
+      requiered: true
     }
-  }
+  },
+  data () {
+    return {
+      currentPage: 1,
+      query:null
+    };
+  },
+  methods: {
+    onPageChange(page) {
+      this.query=null;
+      this.currentPage = page;
+    }
+  },
+  computed: {
+     reversedData: function () {
+       let source
+       if(this.query){
+          source=  this.entity.filter(ee => ee.title.toString().toLowerCase().indexOf(this.query.toString().toLowerCase()) > -1);
+       }else{
+         source = this.entity.slice((this.currentPage*10),((this.currentPage+1)*10));
+       }
+       
+      return source
+    },
+  },
 };
 </script>

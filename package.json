@@ -19,7 +19,8 @@
     "jwt-decode": "^2.2.0",
     "moment": "^2.22.2",
     "nuxt": "^2.0.0",
-    "vue-quill-editor": "^3.0.6"
+    "vue-quill-editor": "^3.0.6",
+    "vuejs-paginate": "^2.1.0"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
