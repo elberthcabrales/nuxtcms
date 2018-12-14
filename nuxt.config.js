@@ -52,7 +52,10 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    //https://github.com/surmon-china/vue-quill-editor/tree/master/examples/nuxt-ssr-example
     { src: '~plugins/nuxt-quill-plugin.js', ssr: false },
+    //https://github.com/euvl/vue-js-modal
+    { src: '~plugins/modal.js', ssr:false},
   ],
 
   router: {

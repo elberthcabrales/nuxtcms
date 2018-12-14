@@ -8,7 +8,6 @@
             <option>Subscriptiores</option>
           </select>
         </div>
-        <Panel :size="12"/>
       </div>
 
       <div class="column is-6">

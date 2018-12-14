@@ -14,7 +14,7 @@
           <div class="card-content">
             <div class="content">
               <div class="control has-icons-left has-icons-right">
-                <input class="input is-large" type="text"  v-model="query" placeholder>
+                <input class="input is-large" type="text" v-model="query" placeholder>
               </div>
             </div>
           </div>
@@ -22,13 +22,16 @@
             <table class="table is-fullwidth is-striped">
               {{entity.length}}
               <tbody>
-                <tr v-for="item in  reversedData" :key="item._id">
+                <tr v-for="item in  reversedData" :key="item.id">
                   <td width="5%">
                     <i class="fa fa-bell-o"></i>
                   </td>
                   <td>{{item.title}}</td>
                   <td>
-                    <a class="button is-small is-primary" href="#">Editar {{item.id}}</a>
+                    <button
+                      class="button is-small is-primary"
+                      @click.prevent="clicked(item)"
+                    >Editar {{item.id}}</button>
                     <a class="button is-small is-danger" href="#">Borrar</a>
                   </td>
                 </tr>
@@ -36,6 +39,7 @@
             </table>
           </div>
         </div>
+
         <footer class="card-footer">
           <Paginate
             :total-pages="Math.round(entity.length/10)"
@@ -67,29 +71,48 @@ export default {
       requiered: true
     }
   },
-  data () {
+  data() {
     return {
       currentPage: 1,
-      query:null
+      query: null
     };
   },
   methods: {
     onPageChange(page) {
-      this.query=null;
+      this.query = null;
       this.currentPage = page;
+    },
+    clicked(item) {
+      this.$emit("buttonClicked",  item);
     }
+    // show() {
+    //   console.log("entro")
+    //   this.$modal.show("hello-world");
+    // },
+    // hide() {
+    //   this.$modal.hide("hello-world");
+    // }
   },
   computed: {
-     reversedData: function () {
-       let source
-       if(this.query){
-          source=  this.entity.filter(ee => ee.title.toString().toLowerCase().indexOf(this.query.toString().toLowerCase()) > -1);
-       }else{
-         source = this.entity.slice((this.currentPage*10),((this.currentPage+1)*10));
-       }
-       
-      return source
-    },
-  },
+    reversedData: function() {
+      let source;
+      if (this.query) {
+        source = this.entity.filter(
+          ee =>
+            ee.title
+              .toString()
+              .toLowerCase()
+              .indexOf(this.query.toString().toLowerCase()) > -1
+        );
+      } else {
+        source = this.entity.slice(
+          this.currentPage * 10,
+          (this.currentPage + 1) * 10
+        );
+      }
+
+      return source;
+    }
+  }
 };
 </script>

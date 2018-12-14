@@ -11,7 +11,7 @@ export default {
   middleware: ["authentication"],
   components: {
     Menu
-  },
+  }
 };
 </script>
 
