@@ -1,9 +1,22 @@
 const state = () => ({
   pages: [], //uno de sus elementos sera tag
   tags:[], //uno de sus elementos sera page
+  singlePage : {
+    category: "",
+    tagsInPage:[],
+    tilte: "",
+    description: "",
+    autor: "",
+    id: "",
+    autor:null,
+    content: "<p>Escribe en mi :)</p>",
+  }
 })
 const getters = {}
 const mutations = {
+  SET_TAGS_IN_PAGE(state,payload){
+    state.singlePage = payload;
+  },
   SET_PAGES(state, payload) {
     state.pages = payload
   },
@@ -55,7 +68,8 @@ const actions = {
   async deletePage({ commit }, payload) {
     const { data } = await this.$axios.delete(`/page/${payload.id}`)
     commit('DELETE_PAGE', data)
-  }, //set tags
+  },
+   //set tags
   setTags({commit},payload){
     commit('SET_TAGS',payload)
   },
@@ -74,7 +88,11 @@ const actions = {
   async addTagToPag({commit}, payload){ // pageId,tagId
     const {data} = await this.$axio.post('/page/tag',payload)
     commit('SAVE_TAGEPAGE',data)
-  }
+  },
+  //singePage
+  setTagsInPage({ commit }, payload) { //esta en plural
+    commit('SET_TAGS_IN_PAGE', payload)
+  },
 }
 
 const pageModule = {

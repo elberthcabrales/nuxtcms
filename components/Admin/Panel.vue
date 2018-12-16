@@ -12,15 +12,19 @@
         </header>
         <div class="card-table">
           <div class="card-content">
-            <div class="content">
-              <div class="control has-icons-left has-icons-right">
-                <input class="input is-large" type="text" v-model="query" placeholder>
+            <div class="container is-fluid">
+              <div class="field has-addons">
+                <div class="control">
+                  <input class="input is-medium" type="text" v-model="query" placeholder="Buscar">
+                </div>
+                <div class="control">
+                  <a class="button is-info is-medium" @click.prevent="create()">Agregar</a>
+                </div>
               </div>
             </div>
           </div>
           <div class="content">
             <table class="table is-fullwidth is-striped">
-              {{entity.length}}
               <tbody>
                 <tr v-for="item in  reversedData" :key="item.id">
                   <td width="5%">
@@ -31,7 +35,7 @@
                     <button
                       class="button is-small is-primary"
                       @click.prevent="clicked(item)"
-                    >Editar {{item.id}}</button>
+                    >sleccionar</button>
                     <a class="button is-small is-danger" href="#">Borrar</a>
                   </td>
                 </tr>
@@ -40,7 +44,7 @@
           </div>
         </div>
 
-        <footer class="card-footer">
+        <div class="buttons has-addons is-centered">
           <Paginate
             :total-pages="Math.round(entity.length/10)"
             :total="entity.length"
@@ -48,7 +52,8 @@
             :current-page="currentPage"
             @pagechanged="onPageChange"
           />
-        </footer>
+        </div>
+        <br>
       </div>
     </div>
   </div>
@@ -83,15 +88,11 @@ export default {
       this.currentPage = page;
     },
     clicked(item) {
-      this.$emit("buttonClicked",  item);
+      this.$emit("buttonClicked", item);
+    },
+    create() {
+      this.$emit("buttonCreate");
     }
-    // show() {
-    //   console.log("entro")
-    //   this.$modal.show("hello-world");
-    // },
-    // hide() {
-    //   this.$modal.hide("hello-world");
-    // }
   },
   computed: {
     reversedData: function() {
