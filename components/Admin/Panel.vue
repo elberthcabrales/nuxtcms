@@ -36,7 +36,7 @@
                       class="button is-small is-primary"
                       @click.prevent="clicked(item)"
                     >sleccionar</button>
-                    <a class="button is-small is-danger" href="#">Borrar</a>
+                    <a class="button is-small is-danger" @click.prevent="deletePage(item)">Borrar</a>
                   </td>
                 </tr>
               </tbody>
@@ -46,7 +46,7 @@
 
         <div class="buttons has-addons is-centered">
           <Paginate
-            :total-pages="Math.round(entity.length/10)"
+            :total-pages="Math.round((entity.length-6)/10)"
             :total="entity.length"
             :per-page="10"
             :current-page="currentPage"
@@ -92,6 +92,9 @@ export default {
     },
     create() {
       this.$emit("buttonCreate");
+    },
+    deletePage(item) {
+      this.$emit("buttonDelete",item);
     }
   },
   computed: {

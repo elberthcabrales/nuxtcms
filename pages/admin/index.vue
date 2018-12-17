@@ -7,6 +7,7 @@
           :entity="pages"
           @buttonClicked="eventListenerPage($event)"
           @buttonCreate="createPage()"
+          @buttonDelete="deletePage($event)"
         />
       </div>
       <div class="column is-6">
@@ -24,8 +25,9 @@
             <input
               class="input is-primary"
               type="text"
-              v-model="singlePage.tilte"
+              v-model="singlePage.title"
               placeholder="Titulo"
+              required
             >
           </div>
         </div>
@@ -72,7 +74,8 @@
         ></div>
         <div class="field is-grouped is-grouped-right">
           <div class="control">
-            <button class="button is-primary" @click="savePage()">Cuardar</button>
+            <button class="button is-primary" @click="updatePage()" v-if="isUpdate">Actualizar</button>
+            <button class="button is-primary" @click="savePage()" v-else>Crear nueva</button>
           </div>
         </div>
       </section>
@@ -83,15 +86,20 @@
       <section class="column is-12">
         <div class="field">
           <div class="control">
-            <input class="input is-primary" type="text" v-model="tagValue" placeholder="Etiqueta">
+            <input
+              class="input is-primary"
+              type="text"
+              v-model="singleTag.value"
+              placeholder="Etiqueta"
+            >
           </div>
           <br>
           <div class="field is-grouped is-grouped-right">
             <p class="control">
-              <a class="button is-primary" v-if="singlePage.id">Agregar a pagina</a>
+              <a class="button is-primary" v-if="singleTag.id">Agregar a pagina</a>
             </p>
             <p class="control">
-              <a class="button is-primary">Guardar</a>
+              <a class="button is-primary" @click="SaveTag()">Guardar</a>
             </p>
             <p class="control">
               <a class="button is-light" v-on:click="hide">Cancel</a>
@@ -113,7 +121,7 @@ export default {
   },
   data() {
     return {
-      tagValue: "",
+      isUpdate: false,
       catgories: [
         "tecnica",
         "licenciatura",
@@ -159,11 +167,17 @@ export default {
     onEditorChange({ editor, html, text }) {
       //console.log("editor change!", editor, html, text);
       //singlePage.content = html;
-       this.$store.dispatch("setTagsInPage", {...this.singlePage, content:html});
+      this.$store.dispatch("setTagsInPage", {
+        ...this.singlePage,
+        content: html
+      });
     },
     eventListenerTag(event) {
       console.log(event);
-      this.tagValue = event.title;
+      this.$store.dispatch("setSingleTag", {
+        id: event.id,
+        value: event.title
+      });
       this.$modal.show("modalTegs");
     },
     //para pasar parametros desde el otro componente
@@ -171,12 +185,12 @@ export default {
       let page = {
         id: event.id,
         category: event.category,
-        tilte: event.title,
+        title: event.title,
         description: event.description,
         content: event.content,
         tagsInPage: []
       };
-
+      this.isUpdate = true;
       this.$axios
         .get(`/tag/page/${event.id}`)
         .then(result => {
@@ -188,20 +202,48 @@ export default {
         .catch(err => {
           console.log(err);
         });
+
       this.$store.dispatch("setTagsInPage", page);
     },
     hide() {
-      this.tagValue = "";
+      this.$store.dispatch("setSingleTag", { id: null, value: "" });
       this.$modal.hide("modalTegs");
     },
     createPage() {
-      console.log("crear pagina!");
+      let data = {
+        category: "",
+        tagsInPage: [],
+        title: "",
+        description: "",
+        autor: "",
+        id: "",
+        autor: null,
+        content: ""
+      };
+      this.$store.dispatch("setTagsInPage", data);
+      this.isUpdate=false;
+      window.scrollBy(0, 1000);
     },
     createEtiqueta() {
+      this.$modal.show("modalTegs");
       console.log("crear Etiqueta!");
     },
-    savePage(){
-      console.log(this.singlePage)
+    savePage() {
+      this.singlePage.autor = this.$store.state.authenticated.id;
+      this.$store.dispatch("savePage", this.singlePage);
+    },
+    updatePage() {
+      this.singlePage.autor = this.$store.state.authenticated.id;
+      this.$store.dispatch("updatePage", this.singlePage);
+    },
+    SaveTag() {
+      console.log(this.singleTag);
+      this.$store.dispatch("setSingleTag", { id: 1, value: "hola soy tag:)" });
+     
+    },
+    deletePage($event){
+      console.log($event)
+      this.$store.dispatch('deletePage',$event)
     }
   },
   async fetch({ store, $axios }) {
@@ -215,7 +257,8 @@ export default {
     ...mapState({
       pages: state => state.page.pages,
       tags: state => state.page.tags,
-      singlePage: state => state.page.singlePage
+      singlePage: state => state.page.singlePage,
+      singleTag: state => state.page.singleTag
     })
   }
 };

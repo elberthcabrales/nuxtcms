@@ -24,7 +24,7 @@
       </div>
 
       <div class="navbar-end">
-        <a class="navbar-item">Usuario logeado</a>
+        <a class="navbar-item">{{authenticated.email}}</a>
         <div class="navbar-item">
           <div class="buttons">
             <a class="button is-warning" v-on:click="logout">Logout</a>
@@ -36,6 +36,8 @@
   <!-- END NAV -->
 </template>
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "AdminMenu",
   mounted() {
@@ -52,6 +54,11 @@ export default {
       this.$store.dispatch("logout");
       //this.$store.dispatch("logout")
     }
+  },
+  computed: {
+    ...mapState({
+      authenticated: state => state.authenticated
+    })
   }
 };
 </script>

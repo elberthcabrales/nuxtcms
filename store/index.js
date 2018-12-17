@@ -10,7 +10,7 @@ const createStore = () => {
   return new Vuex.Store({
     state: {
       authenticated: null,
-      isLoading: null //aqui controlaremos cuando haya procesos cargando y será nuestra bandera para mostrar imgs
+      token:null
     },
     mutations: {
       setToken(state, token) {
@@ -19,7 +19,7 @@ const createStore = () => {
         var exp = moment.unix(state.authenticated.exp);
         var now = moment()
         var dias=exp.diff(now, 'days');
-    
+        state.token = token;
         if (exp.diff(now, 'days') > 1) {
           this.$router.push('/admin');
         }else{
