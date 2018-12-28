@@ -46,9 +46,9 @@
 
         <div class="buttons has-addons is-centered">
           <Paginate
-            :total-pages="Math.round((entity.length-6)/10)"
+            :total-pages="Math.round(entity.length/5)"
             :total="entity.length"
-            :per-page="10"
+            :per-page="5"
             :current-page="currentPage"
             @pagechanged="onPageChange"
           />
@@ -109,9 +109,10 @@ export default {
               .indexOf(this.query.toString().toLowerCase()) > -1
         );
       } else {
+        let current = this.currentPage === 1 ? 0: this.currentPage;
         source = this.entity.slice(
-          this.currentPage * 10,
-          (this.currentPage + 1) * 10
+          current*5, 
+          (this.currentPage+1) * 5
         );
       }
 

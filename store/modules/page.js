@@ -41,20 +41,19 @@ const mutations = {
     state.pages.splice(index, 1)
   },
   SAVE_TAGEPAGE(state, payload) {
-    const tag = state.tags.find(p => p.id === payload.tagId)
-    const index = state.pages.findIndex(p => p.id === payload.id)
-    state.pages[index].tag.push(tag)
+    state.singlePage.tagsInPage.push({id:payload.id,value:payload.value});
   },
   //tags
   SET_TAGS(state, payload) {
     state.tags = payload
   },
   SAVE_TAG(state, payload) {
+    console.log(payload)
     state.tags.push(payload)
   },
   UPDATE_TAG(state, payload) {
     const index = state.tags.findIndex(p => p.id === payload.id)
-    state.tags[index].value = payload.value
+    state.tags[index].title = payload.value
   },
   DELETE_TAG(state, payload) {
     const index = state.tags.findIndex(p => p.id === payload.id)
@@ -62,6 +61,11 @@ const mutations = {
   },
   SET_SINGLE_TAG(state, payload) {
     state.singleTag = payload;
+  },
+  REMOVE_TAG_FROM_PAGE(state,payload){
+    console.log(payload)
+    const index = state.singlePage.tagsInPage.findIndex(t=> t.id === payload.tagId)
+    state.singlePage.tagsInPage.splice(index, 1)
   }
 }
 const actions = {
@@ -99,20 +103,29 @@ const actions = {
     commit('SET_TAGS', payload)
   },
   async saveTag({ commit }, payload) {
-    const { data } = await this.$axios.post('/tag', payload)
-    commit('SAVE_TAG', data)
+    const {value} =payload;
+    const { data } = await this.$axios.post('/tag', {value:value})
+    console.log(data);
+    commit('SAVE_TAG', {title:value, id:data})
   },
   async updateTag({ commit }, payload) {
-    const { data } = await this.$axios.patch(`/tag/${payload.id}`, payload)
-    commit('UPDATE_TAG', data)
+    //console.log({...payload})
+    const { data } = await this.$axios.put(`/tag`, {...payload})
+    //console.log(data)
+    commit('UPDATE_TAG', {...payload})
   },
   async deleteTag({ commit }, payload) {
-    const { data } = await this.$axios.delete(`/page/${payload.id}`)
-    commit('DELETE_TAG', data)
+    const { data } = await this.$axios.delete(`/tag/${payload.id}`)
+    commit('DELETE_TAG', payload)
   },
+  //agregarle una etiquetaa una
   async addTagToPag({ commit }, payload) { // pageId,tagId
-    const { data } = await this.$axio.post('/page/tag', payload)
-    commit('SAVE_TAGEPAGE', data)
+    const { data } = await this.$axios.post('/page/tag',{
+      pageId:payload.singlePage.id,
+      tagId:payload.singleTag.id
+    });
+    commit('SAVE_TAGEPAGE', payload.singleTag)
+    this.$toast.success("Se agrego la etiqueta correctamente ")
   },
   //singePage
   setTagsInPage({ commit }, payload) { //esta en plural
@@ -120,6 +133,13 @@ const actions = {
   },
   setSingleTag({ commit }, payload) {
     commit('SET_SINGLE_TAG', payload);
+  },
+  async removeTagFromPage({commit},payload){
+    console.log(payload)
+    const {pageId, tagId} = payload;
+    const { data } = await this.$axios.delete(`/page/${pageId}/tag/${tagId}`);
+    this.$toast.success("Se elimino la etiqueta correctamente")
+    commit('REMOVE_TAG_FROM_PAGE',payload);
   }
 }
 

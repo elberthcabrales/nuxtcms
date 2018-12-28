@@ -2,7 +2,7 @@
   <ul class="pagination is-centered" role="navigation" aria-label="pagination">
     <li class="pagination-item">
       <button
-      class="pagination-next"
+        class="pagination-next"
         type="button"
         @click="onClickFirstPage"
         :disabled="isInFirstPage"
@@ -12,7 +12,7 @@
 
     <li>
       <button
-      class="pagination-previous"
+        class="pagination-previous"
         type="button"
         @click="onClickPreviousPage"
         :disabled="isInFirstPage"
@@ -22,7 +22,7 @@
 
     <li v-for="page in this.pages" :key="page.id" class="pagination-item">
       <button
-      class="pagination-link"
+        class="pagination-link"
         type="button"
         @click="onClickPage(page.name)"
         :disabled="page.isDisabled"
@@ -33,7 +33,7 @@
 
     <li class="pagination-item">
       <button
-      class="pagination-next"
+        class="pagination-next"
         type="button"
         @click="onClickNextPage"
         :disabled="isInLastPage"
@@ -43,7 +43,7 @@
 
     <li class="pagination-item">
       <button
-      class="pagination-previous"
+        class="pagination-previous"
         type="button"
         @click="onClickLastPage"
         :disabled="isInLastPage"
@@ -96,10 +96,12 @@ export default {
       const range = [];
 
       for (let i = this.startPage; i <= this.endPage; i += 1) {
-        range.push({
-          name: i,
-          isDisabled: i === this.currentPage
-        });
+        if (i > 0) {
+          range.push({
+            name: i,
+            isDisabled: i === this.currentPage
+          });
+        }
       }
 
       return range;

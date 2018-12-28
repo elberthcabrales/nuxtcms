@@ -27,7 +27,7 @@ const createStore = () => {
         }
       },
       clearToken(state) {
-        state.authenticated = null;
+        //state.authenticated = null;
         localStorage.removeItem('token')
         this.$router.push('/admin/auth');
       }
@@ -35,13 +35,13 @@ const createStore = () => {
     actions: {
       authenticateUser(vuexContext, authData) {
         let authUrl = 'auth'
-
         return this.$axios
           .$post(authUrl, {
             email: authData.email,
             password: authData.password,
           })
           .then(result => {
+            this.$toast.success('Logging in...')
             vuexContext.commit("setToken", result.token);
             localStorage.setItem('token', result.token)
 

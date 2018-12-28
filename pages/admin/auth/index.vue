@@ -49,7 +49,6 @@ export default {
   },
   methods: {
     submit() {
-      this.$toast.success('Logging in...')
       this.$store
         .dispatch("authenticateUser", {
           email: this.email,

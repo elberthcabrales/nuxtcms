@@ -16,6 +16,7 @@
           :entity="tags"
           @buttonClicked="eventListenerTag($event)"
           @buttonCreate="createEtiqueta()"
+           @buttonDelete="deleteTag($event)"
         />
       </div>
       <section class="column is-10">
@@ -56,7 +57,11 @@
           <div class="control">
             <div class="select is-multiple">
               <select multiple>
-                <option v-for="(item, id) in singlePage.tagsInPage" :key="id">{{item}}</option>
+                <option
+                  v-for="(item, id) in singlePage.tagsInPage"
+                  :key="id"
+                  @click="selectTag(item)"
+                >{{item.value}}</option>
               </select>
             </div>
           </div>
@@ -96,16 +101,28 @@
           <br>
           <div class="field is-grouped is-grouped-right">
             <p class="control">
-              <a class="button is-primary" v-if="singleTag.id">Agregar a pagina</a>
+              <a
+                class="button is-primary"
+                v-if="singlePage.id && singleTag.id"
+                @click="addTagToPage()"
+              >Agregar a pagina seleccionada</a>
             </p>
             <p class="control">
-              <a class="button is-primary" @click="SaveTag()">Guardar</a>
+              <a class="button is-primary" v-if="!singleTag.id" @click="SaveTag()">Guardar</a>
+              <a class="button is-primary" v-else @click="updateTag()">Actualizar</a>
             </p>
             <p class="control">
               <a class="button is-light" v-on:click="hide">Cancel</a>
             </p>
           </div>
         </div>
+      </section>
+    </modal>
+    <modal name="removeTag" class="columns">
+      <section class="column is-12 is-center">
+        <button class="button is-large is-fullwidth is-danger" @click="deleteTagFromPage()">Desea quitar esta etiqueta</button>
+           <span class="tag">{{tagToPopFromPage.id}}</span>
+         <span class="tag">{{tagToPopFromPage.value}}</span>
       </section>
     </modal>
   </div>
@@ -122,6 +139,7 @@ export default {
   data() {
     return {
       isUpdate: false,
+      tagToPopFromPage:{},
       catgories: [
         "tecnica",
         "licenciatura",
@@ -195,8 +213,9 @@ export default {
         .get(`/tag/page/${event.id}`)
         .then(result => {
           let { data } = result;
+          //console.log(data);
           data.forEach(e => {
-            page.tagsInPage.push(e.value);
+            page.tagsInPage.push({ id: e.tagId, value: e.value });
           });
         })
         .catch(err => {
@@ -205,8 +224,20 @@ export default {
 
       this.$store.dispatch("setTagsInPage", page);
     },
+    addTagToPage() {
+      //validar que no exista la etiqueta
+      this.$store.dispatch("addTagToPag", {
+        singleTag: this.singleTag,
+        singlePage: this.singlePage
+      });
+      this.$modal.hide("modalTegs");
+    },
     hide() {
       this.$store.dispatch("setSingleTag", { id: null, value: "" });
+      this.$modal.hide("modalTegs");
+    },
+    updateTag(){
+      this.$store.dispatch("updateTag",this.singleTag)
       this.$modal.hide("modalTegs");
     },
     createPage() {
@@ -221,12 +252,16 @@ export default {
         content: ""
       };
       this.$store.dispatch("setTagsInPage", data);
-      this.isUpdate=false;
+      this.isUpdate = false;
       window.scrollBy(0, 1000);
     },
     createEtiqueta() {
+      let data = {
+        id: "",
+        value: ""
+      };
+      this.$store.dispatch("setSingleTag", data);
       this.$modal.show("modalTegs");
-      console.log("crear Etiqueta!");
     },
     savePage() {
       this.singlePage.autor = this.$store.state.authenticated.id;
@@ -237,13 +272,24 @@ export default {
       this.$store.dispatch("updatePage", this.singlePage);
     },
     SaveTag() {
-      console.log(this.singleTag);
-      this.$store.dispatch("setSingleTag", { id: 1, value: "hola soy tag:)" });
-     
+      this.$store.dispatch("saveTag", this.singleTag);
+      this.$modal.hide("modalTegs");
     },
-    deletePage($event){
-      console.log($event)
-      this.$store.dispatch('deletePage',$event)
+    deletePage($event) {
+      //console.log($event);
+      this.$store.dispatch("deletePage", $event);
+    },
+    deleteTag($event) {
+      this.$store.dispatch("deleteTag", $event);
+    },
+    selectTag(item) {
+      //console.log(item);
+      this.tagToPopFromPage={id:item.id,value:item.value};
+      this.$modal.show("removeTag");
+    },
+    deleteTagFromPage(){
+      this.$store.dispatch("removeTagFromPage",{pageId:this.singlePage.id,tagId:this.tagToPopFromPage.id})
+      this.$modal.hide("removeTag")
     }
   },
   async fetch({ store, $axios }) {
