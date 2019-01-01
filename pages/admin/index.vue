@@ -146,7 +146,6 @@ export default {
         "capacitacion",
         "blog",
         "diplomad",
-        "equipo",
         "ofertas"
       ],
       editorOption: {

@@ -1,5 +1,6 @@
 import Vuex from 'vuex'
 import pageModule from './modules/page'
+import imageModule from './modules/image'
 import emailModule from './modules/mail'
 import userModule from './modules/user'
 import jwt_decode from 'jwt-decode'
@@ -61,8 +62,9 @@ const createStore = () => {
     },
     modules: {
       page: pageModule,
-      email: emailModule,
+      image: imageModule,
       user: userModule,
+      email:emailModule
     }
   })
 }

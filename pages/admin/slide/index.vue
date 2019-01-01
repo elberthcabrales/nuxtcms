@@ -3,10 +3,8 @@
   <div class="container">
     <slideform/>
     <div class="columns is-multiline">
-      <imgpanel/>
-      <imgpanel/>
-      <imgpanel/>
-      <imgpanel/>
+      <imgpanel v-for="(item, id) in images" 
+        :key="id" :id="item.id" :title="item.title" :path="item.path" :description="item.description"/>
     </div>
   </div>
 </template>
@@ -20,7 +18,15 @@ export default {
   components: {
     Imgpanel,
     Slideform
-  }
+  },
+  computed: {
+    ...mapState({
+      images: state => state.image.images
+    })
+  },
+  mounted() {
+    this.$store.dispatch("fetchImages");
+  },
 };
 </script>
 <style>

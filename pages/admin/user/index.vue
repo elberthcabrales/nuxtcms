@@ -2,26 +2,22 @@
   <div class="container">
     <div class="columns">
       <div class="column is-6">
-        <div class="select">
-          <select>
-            <option>Correos</option>
-            <option>Subscriptiores</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="column is-6">
         <div class="box emparejamelo">
           <article class="media">
             <div class="media-content">
               <div class="content">
                 <p>
-                  <strong>John Smith</strong>
-                  <small>@johnsmith</small>
-                  <small>31m</small>
+                  <strong>En proceso!</strong>
+                  <small>@sorry aun no esta terminado :(</small>
                   <br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
                 </p>
               </div>
+            </div>
+            <div class="select">
+              <select>
+                <option>Correos</option>
+                <option>Subscriptiores</option>
+              </select>
             </div>
           </article>
         </div>
@@ -39,8 +35,8 @@ export default {
 };
 </script>
 <style>
-.emparejamelo{
-  margin-top:46px;
+.emparejamelo {
+  margin-top: 46px;
 }
 .container {
   margin-block-start: 10px;
