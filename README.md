@@ -1,4 +1,4 @@
-# colegiosayan
+# To create pages
 
 > My kryptonian Nuxt.js project
 
