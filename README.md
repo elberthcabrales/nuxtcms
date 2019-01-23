@@ -30,4 +30,4 @@ resta por hacer
 
 
 the api rest is 
-https://github.com/elberthcabrales/hapirest/blob/master/README.md
+https://github.com/elberthcabrales/hapirest
