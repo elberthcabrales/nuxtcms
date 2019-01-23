@@ -27,3 +27,7 @@ resta por hacer
 2-agregar imagen a pagina
 3-crear front
 4-agregr blog
+
+
+the api rest is 
+https://github.com/elberthcabrales/hapirest/blob/master/README.md
